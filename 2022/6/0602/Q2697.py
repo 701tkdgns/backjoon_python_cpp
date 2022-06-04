@@ -16,3 +16,4 @@ else:
         num += 1
         candidate = sorted(candidate, reverse=True)
     print(num)
+

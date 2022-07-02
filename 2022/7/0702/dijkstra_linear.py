@@ -1,11 +1,11 @@
 def getSmallIndex():
     mn = inf
-    index = 0
+    idx = 0
     for i in range(n):
-        if distance[i] < mn and not visit[i]:
+        if mn > distance[i] and not visit[i]:
             mn = distance[i]
-            index = i
-    return index
+            idx = i
+    return idx
 
 
 def dijkstra(start):
@@ -16,7 +16,7 @@ def dijkstra(start):
         current = getSmallIndex()
         visit[current] = True
         for j in range(n):
-            if distance[current] + lst[current][j] < distance[j]:
+            if distance[j] > distance[current] + lst[current][j]:
                 distance[j] = distance[current] + lst[current][j]
 
 
@@ -36,5 +36,4 @@ distance = [0] * n
 
 dijkstra(0)
 print(*distance)
-
 # 0 2 3 1 2 4

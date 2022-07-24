@@ -17,13 +17,14 @@ def bfs():
         x, y = abs(x - i), abs(y - j)
         if x == 1 and y == 0:
             for dx, dy in direction_o:
-                pass
+                nx, ny = x + dx, y + dy
         elif x == 0 and y == 1:
             for dx, dy in direction_w:
-                pass
+                nx, ny = x + dx, y + dy
         elif x == 1 and y == 1:
             for dx, dy in direction_t:
-                pass
+                nx, ny = x + dx, y + dy
+
 
 N = int(input())
 lst = []

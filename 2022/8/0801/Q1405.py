@@ -1,21 +1,23 @@
-def dfs(x, y, visited, cnt):
+d = [(-1, 0), (1, 0), (0, -1), (0, 1)]  # 4방향 탐색
+
+
+def dfs(r, c, visited, total):
     global answer
     if len(visited) == N + 1:
-        answer += cnt
+        answer += total
         return
-    for idx, v in enumerate(direction):
-        nx, ny = x + v[0], y + v[1]
-        if (nx, ny) not in visited:
-            visited.append([nx, ny])
-            dfs(nx, ny, visited, cnt * probability[idx])
+    for idx in range(4):
+        nr = r + d[idx][0]
+        nc = c + d[idx][1]
+        if (nr, nc) not in visited:
+            visited.append((nr, nc))
+            dfs(nr, nc, visited, total * probability[idx])
             visited.pop()
 
 
-lst = list(map(int, input().split()))
-N = lst[0]
-del lst[0]
-direction = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-probability = lst
+N, ep, wp, sp, np = map(int, input().split())
+probability = [ep, wp, sp, np]
 answer = 0
+
 dfs(0, 0, [(0, 0)], 1)
 print(answer * (0.01 ** N))

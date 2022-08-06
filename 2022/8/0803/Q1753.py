@@ -20,14 +20,14 @@ def dijkstra(start):
 V, E = map(int, std.readline().split())
 S = int(std.readline())
 lst = [[] for _ in range(V + 1)]
-INF = 10**10
+INF = sys.maxsize
 dp = [INF for _ in range(V + 1)]
 for _ in range(E):
     u, v, w = map(int, std.readline().split())
     lst[u].append([v, w])
 dijkstra(S)
 for i in range(1, V + 1):
-    if dp[i] == 10**10:
+    if dp[i] == INF:
         print("INF")
     else:
         print(dp[i])

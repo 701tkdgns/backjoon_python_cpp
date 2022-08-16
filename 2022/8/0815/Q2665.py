@@ -1,6 +1,5 @@
 import heapq
 
-
 N = int(input())
 lst = [list(map(int, input().rstrip())) for _ in range(N)]
 visit = [[0 for _ in range(N)] for _ in range(N)]
@@ -10,7 +9,7 @@ heapq.heappush(hq, [0, 0, 0])
 visit[0][0] = 1
 while hq:
     a, x, y = heapq.heappop(hq)
-    if x == N -1 and y == N -1:
+    if x == N - 1 and y == N - 1:
         print(a)
         break
     for dx, dy in direction:

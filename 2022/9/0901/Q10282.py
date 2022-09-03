@@ -1,28 +1,36 @@
 import heapq
 
 
-def dijkstra(node):
+def dijkstra(start):
     hq = []
-    dp[node] = 0
-    heapq.heappush(hq, [node, 0])
+    dp = [inf for _ in range(n + 1)]
+    dp[start] = 0
+    heapq.heappush(hq, [start, 0])
     while hq:
-        now, wei = heapq.heappop(hq)
-        if wei > dp[now]:
+        node, cost = heapq.heappop(hq)
+        if dp[node] < cost:
             continue
-        for next_node, tmp_wei in lst[now]:
-            next_wei = wei + tmp_wei
-            if next_wei < dp[next_node]:
-                dp[next_node] = next_wei
-                heapq.heappush(hq, [next_node, next_wei])
+        for next_node, tmp_cost in lst[node]:
+            next_cost = tmp_cost + cost
+            if dp[next_node] > next_cost:
+                dp[next_node] = next_cost
+                heapq.heappush(hq, [next_node, next_cost])
+    return dp
 
 
 T = int(input())
+inf = 10 ** 8
 for _ in range(T):
     n, d, c = map(int, input().split())
     lst = [[] for _ in range(n + 1)]
-    dp = [0 for _ in range(n + 1)]
     for _ in range(d):
         a, b, s = map(int, input().split())
-        lst[a].append([b, s])
-    dijkstra(c)
-    print(sum(dp), max(dp))
+        lst[b].append([a, s])
+    dp = dijkstra(c)
+    max_dp, cnt = 0, 0
+    for i in dp:
+        if i != inf:
+            if max_dp < i:
+                max_dp = i
+            cnt += 1
+    print(cnt, max_dp)

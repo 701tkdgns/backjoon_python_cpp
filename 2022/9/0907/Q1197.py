@@ -1,13 +1,11 @@
 import heapq, sys
-
 std = sys.stdin.readline
 inf = sys.maxsize
 
 
-def dijkstra(x):
+def dijkstra(v):
     hq = []
-    heapq.heappush(hq, [x, 0])
-    dp[x] = 0
+    heapq.heappush(hq, [v, 0])
     while hq:
         node, cost = heapq.heappop(hq)
         if dp[node] < cost:
@@ -20,13 +18,11 @@ def dijkstra(x):
 
 
 V, E = map(int, std().split())
-lst = [[] for _ in range(V + 1)]
+lst = [[] for _ in range(V)]
+dp = [inf for _ in range(V)]
 for _ in range(E):
-    a, b, s = map(int, std().split())
-    lst[a].append([b, s])
-res = inf
-for i in range(1, V):
-    dp = [inf for _ in range(V + 1)]
-    dijkstra(i)
-    res = min(res, dp[V])
-print(res)
+    a, b, c = map(int, std().split())
+    lst[a-1].append([b-1, c])
+    lst[b-1].append([a-1, c])
+dijkstra(0)
+print(dp[V-1])

@@ -1,28 +1,29 @@
-import heapq, sys
-std = sys.stdin.readline
-inf = sys.maxsize
+import sys, heapq
+input = sys.stdin.readline
 
 
-def dijkstra(v):
-    hq = []
-    heapq.heappush(hq, [v, 0])
+def Prim(v):
+    hq = [[v, 0]]
+    dp = [False for _ in range(V + 1)]
+    cnt, ans = 0, 0
     while hq:
+        if cnt == V:
+            break
         node, cost = heapq.heappop(hq)
-        if dp[node] < cost:
-            continue
-        for new_node, tmp_cost in lst[node]:
-            new_cost = tmp_cost + cost
-            if dp[new_node] > new_cost:
-                dp[new_node] = new_cost
+        if not dp[node]:
+            dp[node] = True
+            ans += cost
+            cnt += 1
+            for new_node, new_cost in lst[node]:
                 heapq.heappush(hq, [new_node, new_cost])
+    return ans
 
 
-V, E = map(int, std().split())
-lst = [[] for _ in range(V)]
-dp = [inf for _ in range(V)]
+V, E = map(int, input().split())
+lst = [[] for _ in range(V + 1)]
 for _ in range(E):
-    a, b, c = map(int, std().split())
-    lst[a-1].append([b-1, c])
-    lst[b-1].append([a-1, c])
-dijkstra(0)
-print(dp[V-1])
+    a, b, c = map(int, input().split())
+    lst[a].append([b, c])
+    lst[b].append([a, c])
+res = Prim(1)
+print(res)

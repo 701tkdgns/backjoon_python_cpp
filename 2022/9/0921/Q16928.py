@@ -21,7 +21,6 @@ def bfs(v):
                             visit[dx] = True
                             dq.append([dx, cnt + 1])
 
-
 N, M = map(int, input().split())
 lst = [[0] for _ in range(101)]
 visit = [False for _ in range(101)]

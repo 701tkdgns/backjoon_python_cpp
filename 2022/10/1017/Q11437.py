@@ -1,7 +1,6 @@
 import sys
-
 sys.setrecursionlimit(10 ** 6)
-
+input = sys.stdin.readline
 
 def tree(v, depth):
     visit[v] = True
@@ -11,22 +10,17 @@ def tree(v, depth):
             parent[i] = v
             tree(i, depth + 1)
 
-# 최소 공통 조상 찾기
-def lca(a, b):
-    # 깊이 맞추기
-    while dp[a] != dp[b]:
-        if dp[a] > dp[b]:
-            a = parent[a]
+
+def lca(s, e):
+    while dp[s] != dp[e]:
+        if dp[s] > dp[e]:
+            s = parent[s]
         else:
-            b = parent[b]
-
-    # 노드 맞추기
-    while a != b:
-        a = parent[a]
-        b = parent[b]
-
-    return a
-
+            e = parent[e]
+    while s != e:
+        s = parent[s]
+        e = parent[e]
+    return s
 
 
 N = int(input())
@@ -38,8 +32,9 @@ for _ in range(N - 1):
     a, b = map(int, input().split())
     lst[a].append(b)
     lst[b].append(a)
+
 tree(1, 0)
 M = int(input())
 for _ in range(M):
     a, b = map(int, input().split())
-    lca(a, b)
+    print(lca(a, b))

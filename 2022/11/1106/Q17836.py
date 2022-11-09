@@ -29,7 +29,7 @@ visit = [[[0] * 2 for _ in range(M)] for _ in range(N)]
 for _ in range(N):
     lst.append(list(map(int, input().split())))
 res = bfs(0, 0, 0)
-if res == None or res > T:
+if res is None or res > T:
     print("Fail")
 else:
     print(res)

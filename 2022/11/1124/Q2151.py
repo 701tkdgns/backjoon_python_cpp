@@ -1,6 +1,4 @@
 import heapq
-from collections import deque
-
 
 def dijkstra(init_x, init_y):
     hq = []

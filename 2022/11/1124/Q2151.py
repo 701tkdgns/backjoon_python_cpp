@@ -30,6 +30,7 @@ def dijkstra(init_x, init_y):
                         visit[nx][ny] = visit[x][y] + 1
                         heapq.heappush(hq, [val, (d + i) % 4, nx, ny])
 
+
 N = int(input())
 lst = []
 visit = [[-1 for _ in range(N)] for _ in range(N)]

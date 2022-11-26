@@ -8,7 +8,8 @@ def dijkstra(init_x, init_y):
         for i in range(4):
             nx, ny = direction[i][0] + x, direction[i][1] + y
             if 0 <= nx < N and 0 <= ny < N:
-                
+
+
 
 N = int(input())
 lst = []

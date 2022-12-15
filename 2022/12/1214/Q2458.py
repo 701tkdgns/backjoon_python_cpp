@@ -19,6 +19,7 @@ for k in range(1, N + 1):
             if lst[i][j] == 1 or (lst[i][k] == 1 and lst[k][j] == 1):
                 lst[i][j] = 1
 
+
 res = 0
 for i in range(1, N + 1):
     known_node = 0

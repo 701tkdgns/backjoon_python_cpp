@@ -9,7 +9,7 @@ for _ in range(int(input())):
     k = 0
     for i in range(4):
         for j in range(i + 1, 4):
-            lst[k] = (x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j])
+            lst[k] = (x[i] - x[j]) ** 2 + (y[i] - y[j]) ** 2
             k += 1
     lst.sort()
     if lst[0] == lst[1] == lst[2] == lst[3] and lst[4] == lst[5]:

@@ -43,7 +43,6 @@ def makeWall(cnt):
 
 N, M = map(int, input().split())
 lst = []
-
 direction = [[0, 1], [1, 0], [0, -1], [-1, 0]]
 for _ in range(N):
     lst.append(list(map(int, input().split())))

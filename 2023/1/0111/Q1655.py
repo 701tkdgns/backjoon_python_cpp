@@ -1,22 +1,29 @@
-import heapq
-
-N = int(input())
-
 # leftHeap은 최대힙으로, rightHeap은 최소힙
 # 최대힙 : 역정렬
 # 최소힙 : 정렬
-left, right = [], []
 
-for _ in range(N):
-    n = int(input().split())
+import heapq
+import sys
 
-    if len(left) == len(right):
-        heapq.heappush(left, -n)
+n = int(sys.stdin.readline())
+
+leftHeap = []
+rightHeap = []
+for i in range(n):
+    num = int(sys.stdin.readline())
+
+    if len(leftHeap) == len(rightHeap):
+        heapq.heappush(leftHeap, -num)
     else:
-        heapq.heappush(right, n)
+        heapq.heappush(rightHeap, num)
 
-    if right and right[0] < -left[0]:
-        L, R = heapq.heappop(left), heapq.heappop(right)
-        heapq.heappush(left, -R)
-        heapq.heappush(right, -L)
-    print(-left[0])
+    if rightHeap and rightHeap[0] < -leftHeap[0]:
+        leftValue = heapq.heappop(leftHeap)
+        rightValue = heapq.heappop(rightHeap)
+
+        heapq.heappush(leftHeap, -rightValue)
+        heapq.heappush(rightHeap, -leftValue)
+
+    print(-leftHeap[0])
+
+# https://art-coding3.tistory.com/44

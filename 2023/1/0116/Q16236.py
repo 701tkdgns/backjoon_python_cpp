@@ -11,8 +11,7 @@ def bfs(init_x, init_y, s):
             nx, ny = x + dx, y + dy
             if 0 <= nx < N and 0 <= ny < N and not visit[nx][ny]:
                 pass
-    return
-
+    return cand
 
 N = int(input())
 lst = []

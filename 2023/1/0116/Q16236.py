@@ -18,7 +18,7 @@ lst = []
 visit = [[False for _ in range(N)] for _ in range(N)]
 direction = [[0, 1], [1, 0], [0, -1], [-1, 0]]
 start_x, start_y = 0, 0
-shark = 1
+shark = 2
 for i in range(N):
     tmp = list(map(int, input().split()))
     for j in range(N):

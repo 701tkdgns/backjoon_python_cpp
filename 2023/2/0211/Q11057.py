@@ -1,5 +1,5 @@
 n = int(input())
-con = 10007
+
 dp = [[0 for _ in range(10)] for _ in range(1001)]
 for i in range(10):
     dp[1][i] = 1

@@ -13,7 +13,7 @@ for idx, word in enumerate(s):
 
 for i in range(1, len(tmp) + 1):
     c = combinations(tmp, i)
-    #
+    # i개에 해당하는 조합 생성 >> nCr : len(tmp) C i
     for j in c:
         tg = list(s)
         for k in j:

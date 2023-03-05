@@ -1,15 +1,13 @@
 from itertools import combinations
 s = list(input())
 stk = []
-tmp = []
 res = set()
-for idx, word in enumerate(s):
-    if word == "(":
-        stk.append(idx)
-    elif word == ")":
-        tmp.append([stk.pop(), idx])
-
-# 괄호끼리 인덱스를 tmp 리스트에 저장함
+tmp = []
+for i in range(len(s)):
+    if s[i] == "(":
+        stk.append(i)
+    elif s[i] == ")":
+        tmp.append([stk.pop(), i])
 
 for i in range(1, len(tmp) + 1):
     c = combinations(tmp, i)
@@ -17,11 +15,10 @@ for i in range(1, len(tmp) + 1):
     for j in c:
         tg = list(s)
         for k in j:
-            tg[k[0]], tg[k[1]] = '', ''
+            tg[k[0]], tg[k[1]] = "", ""
         res.add(''.join(tg))
 for r in sorted(list(res)):
     print(r)
-
 
 
 # 순열

@@ -1,44 +1,28 @@
-def dfs(a, b, c, d):
-    global res
-    if a >= n or b >= n or c >= n or d >= n:
-        return
-
-    if A[a] + B[b] + C[c] + D[d] == 0:
-        res += 1
-        return
-
-    for j in range(n):
-        if not vA[a + j]:
-            vA[a + j] = True
-            dfs(a + j, b, c, d)
-            vA[a + j] = False
-
-        if not vB[b + j]:
-            vB[b + j] = True
-            dfs(a, b + j, c, d)
-            vB[b + j] = False
-
-        if not vC[c + j]:
-            vC[c + j] = True
-            dfs(a, b, c + j, d)
-            vC[c + j] = False
-
-        if not vD[d + j]:
-            vD[d + j] = True
-            dfs(a, b, c, d + j)
-            vD[d + j] = False
-
-
 n = int(input())
-A, B, C, D = [], [], [], []
-vA, vB, vC, vD = [False for _ in range(n)], [False for _ in range(n)], [False for _ in range(n)], [False for _ in
-                                                                                                   range(n)]
-res = 0
+data = []
 for i in range(n):
-    tmp = list(map(int, input().split()))
-    A.append(tmp[0])
-    B.append(tmp[1])
-    C.append(tmp[2])
-    D.append(tmp[3])
+    data.append(list(map(int, input().split())))
+ab, cd = [], []
+for i in range(n):
+    for j in range(n):
+        ab.append(data[i][0] + data[j][1])
+        cd.append(data[i][2] + data[j][3])
 
-dfs(0, 0, 0, 0)
+ab.sort()
+cd.sort()
+i, j = 0, len(cd) - 1
+res = 0
+while i < len(ab) and j >= 0:
+    if ab[i] + cd[j] == 0:
+        next_i, next_j = i + 1, j - 1
+        while next_i < len(ab) and ab[i] == ab[next_i]:
+            next_i += 1
+        while next_j >= 0 and cd[j] == cd[next_j]:
+            next_j -= 1
+        res += (next_i - i) * (j - next_j)
+        i, j = next_i, next_j
+    elif ab[i] + cd[j] > 0:
+        j -= 1
+    else:
+        i += 1
+print(res)

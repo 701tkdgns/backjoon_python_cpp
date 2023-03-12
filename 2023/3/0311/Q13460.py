@@ -20,8 +20,7 @@ def bfs():
             nbx, nby, bc = move(bx, by, dx, dy)
             if lst[nbx][nby] != "O":
                 if lst[nrx][nry] == "O":
-                    print(d)
-                    return
+                    return d
 
                 if nrx == nbx and nry == nby:
                     if rc > bc:
@@ -33,23 +32,24 @@ def bfs():
                 if not visit[nrx][nry][nbx][nby]:
                     visit[nrx][nry][nbx][nby] = True
                     dq.append([nrx, nry, nbx, nby, d + 1])
-    print(-1)
+    return -1
 
 
 N, M = map(int, input().split())
 lst = []
 visit = [[[[False for _ in range(10)] for _ in range(10)] for _ in range(10)] for _ in range(10)]
-red, blue = [], []
+_rx, _ry, _bx, _by = 0, 0, 0, 0
 direction = [[0, 1], [1, 0], [0, -1], [-1, 0]]
 for i in range(N):
     tmp = list(input().rstrip())
     for j in range(len(tmp)):
         if tmp[j] == "R":
-            red = [i, j]
+            _rx, _ry = i, j
         if tmp[j] == "B":
-            blue = [i, j]
+            _bx, _by = i, j
     lst.append(tmp)
 dq = deque()
-dq.append([red[0], red[1], blue[0], blue[1], 1])
-visit[red[0]][red[1]][blue[0]][blue[1]] = True
-bfs()
+dq.append([_rx, _ry, _bx, _by, 1])
+visit[_rx][_ry][_bx][_by] = True
+res = bfs()
+print(res)

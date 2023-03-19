@@ -1,20 +1,35 @@
 import heapq
-
 T = int(input())
 for _ in range(T):
-    Q = int(input())
-    min_hq, max_hq = [], []
-    for _ in range(Q):
-        O, N = input().split()
-        N = int(N)
+    max_heap, min_heap = [], []
+    visit = [False for _ in range(1000001)]
+    order_num = int(input())
+    for key in range(order_num):
+        order = input().rsplit()
+        if order[0] == 'I':
+            heapq.heappush(min_heap, (int(order[1]), key))
+            heapq.heappush(max_heap, (int(order[1]) * -1, key))
+            visit[key] = True
+        elif order[0] == 'D':
+            if order[1] == '-1':
+                while min_heap and not visit[min_heap[0][1]]:
+                    heapq.heappop(min_heap)
+                if min_heap:
+                    visit[min_heap[0][1]] = False
+                    heapq.heappop(min_heap)
+            elif order[1] == '1':
+                while max_heap and not visit[max_heap[0][1]]:
+                    heapq.heappop(max_heap)
+                if max_heap:
+                    visit[max_heap[0][1]] = False
+                    heapq.heappop(max_heap)
 
-        if O == "I":
-            heapq.heappush(min_hq, [N, N])
-            heapq.heappush(max_hq, [-N, N])
-        else:
-            if N == 1:
-                heapq.heappop(max_hq)
-            else:
-                heapq.heappop(min_hq)
+    while min_heap and not visit[min_heap[0][1]]:
+        heapq.heappop(min_heap)
+    while max_heap and not visit[max_heap[0][1]]:
+        heapq.heappop(max_heap)
 
-    print(max_hq, min_hq)
+    if min_heap and max_heap:
+        print(-max_heap[0][0], min_heap[0][0])
+    else:
+        print('EMPTY')

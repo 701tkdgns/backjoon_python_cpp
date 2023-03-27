@@ -27,10 +27,14 @@ lst = []
 parent = [i for i in range(N + 1)]
 res = 0
 for i in range(M):
-    a, b, c = map(int, input().split())
+    a, b, c = map(int, input().split()) # start, end, cost
+    lst.append([c, a, b])
 lst.sort(key=lambda x: x[0])
 for dis, a, b in lst:
+    print(dis, a, b, end=" ")
     if find(a) != find(b): # 루트가 같으면 할 필요가 없음
         union(a, b)
+        print(dis, end=" ")
         res += dis
+        print(parent, res)
 print(res)

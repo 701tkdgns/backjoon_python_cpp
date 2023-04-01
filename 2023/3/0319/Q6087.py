@@ -1,39 +1,37 @@
-import heapq
+import collections
 
 
-def dijkstra(sx, sy):
-    visit[sx][sy] = -1
-    hq = []
-    heapq.heappush(hq, [0, sx, sy])
-    while hq:
-        wei, x, y = heapq.heappop(hq)
-        if x == C[1][0] and y == C[1][1]:
-            return wei - 1
-        for idx in range(4):
-            nx, ny = x + direction[idx][0], y + direction[idx][1]
+def bfs(cur_r, cur_c, dst_r, dst_c):
+    q = collections.deque()
+    q.append([cur_r, cur_c, -1])
+    V[cur_r][cur_c] = 1
+    while q:
+        cur_r, cur_c, cnt = q.popleft()
+        if cur_r == dst_r and cur_c == dst_c:
+            return cnt
+        for dx, dy in dr:
+            nxt_r, nxt_c = cur_r, cur_c
             while True:
-                if not (0 <= nx < H and 0 <= ny < W):
+                nxt_r, nxt_c = nxt_r + dx, nxt_c + dy
+                if 0 <= nxt_r <= H - 1 and 0 <= nxt_c <= W - 1:
+                    if A[nxt_r][nxt_c] == '*':
+                        break
+                    if not V[nxt_r][nxt_c]:
+                        q.append([nxt_r, nxt_c, cnt + 1])
+                        V[nxt_r][nxt_c] = 1
+                else:
                     break
-                if lst[nx][ny] == "*":
-                    break
-                if visit[nx][ny] < visit[x][y] + 1:
-                    break
-                heapq.heappush(hq, [wei + 1, nx, ny])
-                visit[nx][ny] = visit[x][y] + 1
-                nx += direction[idx][0]
-                ny += direction[idx][1]
 
 
 W, H = map(int, input().split())
-lst = []
-inf = W * H + 1
-visit = [[inf for _ in range(W)] for _ in range(H)]
-direction = [[0, 1], [1, 0], [0, -1], [-1, 0]]
-C = []
-for i in range(H):
-    tmp = list(input().rstrip())
-    for j in range(W):
-        if tmp[j] == "C":
-            C.append([i, j])
-    lst.append(tmp)
-print(dijkstra(C[0][0], C[0][1]))
+A = [list(input()) for _ in range(H)]
+V = [[0] * W for _ in range(H)]
+dr = [[0, -1], [0, 1], [-1, 0], [1, 0]]
+conn_points = []
+for r in range(H):
+    for c in range(W):
+        if A[r][c] == 'C':
+            conn_points.append([r, c])
+start_r, start_c = conn_points[0][0], conn_points[0][1]
+dst_r, dst_c = conn_points[1][0], conn_points[1][1]
+print(bfs(start_r, start_c, dst_r, dst_c))

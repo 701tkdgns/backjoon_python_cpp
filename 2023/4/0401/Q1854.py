@@ -1,20 +1,21 @@
 import heapq
 import sys
+
 inf = sys.maxsize
 
 
-def dijkstra(v):
+def dijkstra(start):
     hq = []
-    heapq.heappush(hq, [v, 0])
-    dp[v][0] = 0
+    dp[start][0] = 0
+    heapq.heappush(hq, [0, start])
     while hq:
-        node, wei = heapq.heappop(hq)
+        wei, node = heapq.heappop(hq)
         for new_node, tmp_wei in lst[node]:
-            new_wei = tmp_wei + wei
-            if new_wei < dp[new_node][k - 1]:
+            new_wei = wei + tmp_wei
+            if dp[new_node][k - 1] > new_wei:
                 dp[new_node][k - 1] = new_wei
                 dp[new_node].sort()
-                heapq.heappush(hq, [new_node, new_wei])
+                heapq.heappush(hq, [new_wei, new_node])
 
 
 n, m, k = map(int, input().split())
@@ -24,8 +25,9 @@ for _ in range(m):
     a, b, c = map(int, input().split())
     lst[a].append([b, c])
 dijkstra(1)
+
 for i in range(1, n + 1):
-    if dp[i][k-1] == inf:
+    if dp[i][k - 1] == inf:
         print(-1)
     else:
         print(dp[i][k - 1])

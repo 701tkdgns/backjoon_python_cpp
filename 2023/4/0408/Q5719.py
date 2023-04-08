@@ -32,8 +32,3 @@ while True:
         lst[u].append([v, p])
     dijkstra(S)
     print(dp)
-
-
-6549
-2042
-2096

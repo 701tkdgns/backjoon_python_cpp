@@ -37,7 +37,7 @@
 # # res, positions = kmp(s, p)
 # # print(res)
 # # print(*positions)
-#
+
 # def makeTable(p):
 #     tmp = [0 for _ in range(len(p))]
 #     j = 0
@@ -48,23 +48,28 @@
 #             j += 1
 #             tmp[i] = j
 #
-#     return tmp
-#
 # def kmp(s, p):
-#     pass
-#
+#     cnt = 0
+#     pos = []
+#     j = 0
+#     for i in range(len(s)):
+#         while j > 0 and s[i] != p[j]:
+#             j = table[j - 1]
+#         if s[i] == p[j]:
+#             if j == len(p) - 1:
+#                 cnt += 1
+#                 pos.append(i - len(p) + 2)
+#                 j = table[j]
+#             else:
+#                 j += 1
+#     return cnt, pos
 #
 # s = input()
 # p = input()
 # table = makeTable(p)
-# print(table)
-# # res, positions = kmp(s, p)
-# # print(res)
-# # print(*positions)
-
-
-
-
+# res, positions = kmp(s, p)
+# print(res)
+# print(*positions)
 
 
 

@@ -1,6 +1,9 @@
+# https://bowbowbow.tistory.com/6
+# https://hooongs.tistory.com/305
+
 def makeTable(p):
-    tmp = [0] * len(p)
     j = 0
+    tmp = [0 for _ in range(len(p))]
     for i in range(1, len(p)):
         while j > 0 and p[i] != p[j]:
             j = tmp[j - 1]
@@ -10,27 +13,30 @@ def makeTable(p):
     return tmp
 
 
-def kmp(t, p):
-    c = 0
-    pos = []
+def kmp(s, p):
+    cnt = 0
     j = 0
-    for i in range(len(t)):
-        while j > 0 and p[j] != t[i]:
+    pos = []
+    for i in range(len(s)):
+        while j > 0 and s[i] != p[j]:
+            print(table, j, 3)
             j = table[j - 1]
-        if p[j] == t[i]:
-            if i == len(p) - 1:
-                c += 1
+            print(table, j, 3)
+        if s[i] == p[j]:
+            if j == len(p) - 1:
+                cnt += 1
                 pos.append(i - len(p) + 2)
                 j = table[j]
+                print(table, j, 2)
             else:
                 j += 1
-    return c, pos
+                print(table, j, 1)
+    return cnt, pos
 
 
-t = input()
-p = input()
-table = makeTable(p)
-print(table)
-cnt, positions = kmp(t, p)
-print(cnt)
+S = input()
+P = input()
+table = makeTable(P)
+res, positions = kmp(S, P)
+print(res)
 print(*positions)

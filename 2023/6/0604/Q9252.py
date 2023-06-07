@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 import sys
 
 input = sys.stdin.readline
@@ -20,4 +19,3 @@ f, s = len(F), len(S)
 
 print(len(dp[f - 1][s - 1]))
 print(dp[f - 1][s - 1])
->>>>>>> 7201c018fbaab2b6ad5d8e4be1d74f3ab5321580

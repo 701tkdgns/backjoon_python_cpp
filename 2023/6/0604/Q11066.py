@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 # T = int(input())
 # for _ in range(T):
 #     K = int(input())
@@ -37,4 +36,3 @@
 #         print(table[0][k - 1])
 #
 #     # https://suri78.tistory.com/15
->>>>>>> 7201c018fbaab2b6ad5d8e4be1d74f3ab5321580

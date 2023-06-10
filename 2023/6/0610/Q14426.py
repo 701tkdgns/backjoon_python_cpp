@@ -63,7 +63,6 @@
 # print(cnt)
 from platform import node
 
-
 # import string, sys
 # input = sys.stdin.readline
 #
@@ -121,18 +120,45 @@ from platform import node
 
 import string
 
+
+class Node(object):
+    def __init__(self, key, data=None):
+        self.key = key
+        self.data = data
+        self.children = {}
+
 class Trie:
     def __init__(self):
-        self.head = {x: [] for x in string.ascii_lowercase}
+        self.root = Node(None)
 
     def insert(self, s):
-        if self.head[s[0]]:
-            self.head[s[0]] = s
-        return
+        cur_node = self.root
+        for c in s:
+            if c not in cur_node.children:
+                cur_node.children[c] = Node(c)
+        cur_node.data = s
 
-    def find(self, s):
-        return self.head[s[0]]
+    def search(self, s):
+        cur_node = self.root
+        for c in s:
+            if c in cur_node.children:
+                cur_node = cur_node.children[c]
+            else:
+                return False
+        if cur_node.data:
+            return True
+        return False
 
-res = Trie()
-res.insert('axis')
-print(res.find('a'))
+
+n, m = map(int, input().split())
+S = Trie()
+for _ in range(n):
+    S.insert(input())
+cnt = 0
+for _ in range(m):
+    t = input()
+    print(S.search(t))
+print(cnt)
+
+# [https://alpyrithm.tistory.com/74]
+# https://blog.hoony.me/4

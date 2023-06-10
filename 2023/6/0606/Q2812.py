@@ -1,3 +1,20 @@
+n, k = map(int, input().split())
+N = input()
+stk = []
+for i in range(n):
+    while stk and stk[-1] < N[i] and k > 0:
+        stk.pop()
+        k -= 1
+    stk.append(N[i])
+res = ''
+for i in stk:
+    res += i
+if k > 0:
+    print(res[:-k])
+else:
+    print(res)
+
+
 # from collections import deque
 # def bfs(n, k, s):
 #     dq = deque()
@@ -14,21 +31,21 @@
 #
 #     return res
 
-import sys
-input = sys.stdin.readline
-
-N, K = map(int, input().split())
-num = input().rstrip()
-stk = []
-for i in range(N):
-    while stk and stk[-1] < num[i] and K > 0:
-        stk.pop()
-        K -= 1
-    stk.append(num[i])
-res = ''
-for i in stk:
-    res += i
-if K > 0:
-    print(res[:-K])
-else:
-    print(res)
+# import sys
+# input = sys.stdin.readline
+#
+# N, K = map(int, input().split())
+# num = input().rstrip()
+# stk = []
+# for i in range(N):
+#     while stk and stk[-1] < num[i] and K > 0:
+#         stk.pop()
+#         K -= 1
+#     stk.append(num[i])
+# res = ''
+# for i in stk:
+#     res += i
+# if K > 0:
+#     print(res[:-K])
+# else:
+#     print(res)

@@ -63,6 +63,7 @@
 # print(cnt)
 from platform import node
 
+
 # import string, sys
 # input = sys.stdin.readline
 #
@@ -118,8 +119,6 @@ from platform import node
 #         res += 1
 # print(res)
 
-import string
-
 
 class Node(object):
     def __init__(self, key, data=None):
@@ -127,38 +126,47 @@ class Node(object):
         self.data = data
         self.children = {}
 
-class Trie:
+
+class Trie(object):
     def __init__(self):
-        self.root = Node(None)
+        self.head = Node(None)
 
-    def insert(self, s):
-        cur_node = self.root
-        for c in s:
-            if c not in cur_node.children:
-                cur_node.children[c] = Node(c)
-        cur_node.data = s
+    def insert(self, string):
+        curr_node = self.head
+        for char in string:
+            if char not in curr_node.children:
+                curr_node.children[char] = Node(char)
+            curr_node = curr_node.children[char]
+        curr_node.data = string
 
-    def search(self, s):
-        cur_node = self.root
-        for c in s:
-            if c in cur_node.children:
-                cur_node = cur_node.children[c]
+    def search(self, string):
+        curr_node = self.head
+        test = ''
+        for char in string:
+            if char in curr_node.children:
+                curr_node = curr_node.children[char]
+                test += char
             else:
                 return False
-        if cur_node.data:
+
+        if test == string:
             return True
-        return False
+        else:
+            return False
 
 
 n, m = map(int, input().split())
 S = Trie()
+cnt = 0
 for _ in range(n):
     S.insert(input())
-cnt = 0
 for _ in range(m):
-    t = input()
-    print(S.search(t))
+    if S.search(input()):
+        cnt += 1
 print(cnt)
+
+
 
 # [https://alpyrithm.tistory.com/74]
 # https://blog.hoony.me/4
+# https://youseop.github.io/2020-11-09-BAEKJOON-14425_%EB%AC%B8%EC%9E%90%EC%97%B4%EC%A7%91%ED%95%A9/

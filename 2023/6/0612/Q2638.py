@@ -9,8 +9,8 @@ def delCheese():
     while q:
         x, y = q.popleft()
         for dx, dy in direction:
-            nx, ny = x + dx, y + dy
-            if 0 <= nx < N and 0 <= ny < M and ((not visit[nx][ny] and not lst[nx][ny]) or lst[nx][ny] == 1):
+            nx, ny = dx + x, dy + y
+            if 0 <= nx < N and 0 <= ny < M and ((lst[nx][ny] == 0 and visit[nx][ny] == 0) or lst[nx][ny] == 1):
                 visit[nx][ny] += 1
                 if lst[nx][ny] == 1 and visit[nx][ny] >= 2:
                     dq.append([nx, ny])
@@ -22,18 +22,14 @@ def delCheese():
 
 N, M = map(int, input().split())
 lst = []
-visit = [[0 for _ in range(M)] for _ in range(N)]
 direction = [[0, 1], [1, 0], [0, -1], [-1, 0]]
-dq = deque()
+visit = [[0 for _ in range(M)] for _ in range(N)]
 for _ in range(N):
     lst.append(list(map(int, input().split())))
-dq = deque()
-dq.append([0, 0])
-
+dq = deque([[0, 0]])
 cnt = 0
 while dq:
     delCheese()
     if dq:
         cnt += 1
-
 print(cnt)

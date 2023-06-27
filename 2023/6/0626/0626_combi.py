@@ -1,9 +1,7 @@
 def permutation(arr, r):
-    arr = sorted(arr)
     used = [0 for _ in range(len(arr))]
 
     def generate(chosen, used):
-
         if len(chosen) == r:
             yield [chosen]
 
@@ -27,5 +25,6 @@ def combination(arr, r):
                 yield [arr[i]] + next
 
 
-for i in permutation('ABCD', 2):
-    print(i)
+lst = ["A", "B", "C", "D"]
+lst.sort()
+permutation(lst, 2)

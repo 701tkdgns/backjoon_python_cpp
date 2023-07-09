@@ -1,0 +1,1 @@
+lst = [list(map(str, input().rstrip())) for _ in range(12)]

@@ -1,15 +1,17 @@
+import sys
 from collections import deque
-N = int(input())
-q = deque([])
-while True:
-    n = int(input())
+
+N = int(sys.stdin.readline())
+queue = deque()
+while 1:
+    n = int(sys.stdin.readline())
     if n == -1:
         break
-    elif n != 0 and len(q) < N:
-        q.append(n)
+    if n != 0 and len(queue) < N:
+        queue.append(n)
     elif n == 0:
-        q.popleft()
-if q:
-    print(*q)
+        queue.popleft()
+if queue:
+    print(*queue)
 else:
-    print('empty')
+    print("empty")

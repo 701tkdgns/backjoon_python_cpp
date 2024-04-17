@@ -1,12 +1,20 @@
 import sys
-
 sys.setrecursionlimit(100000)
+input = sys.stdin.readline
+arr = list(input().rstrip())
+result = [""] * len(arr)
 
 
-def dfs():
-    pass
+def solution(start, arr):
+    if not arr:
+        return
+    min_val = min(arr)
+    temp = arr.index(min_val)
+
+    result[start + temp] = min_val
+    print("".join(result))
+    solution(start + temp + 1, arr[temp + 1:])
+    solution(start, arr[:temp])
 
 
-S = input()
-s = ['' for _ in range(len(S))]
-visit = [0 for _ in range(len(S))]
+solution(0, arr)

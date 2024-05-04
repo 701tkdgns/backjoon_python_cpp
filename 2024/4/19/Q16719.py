@@ -8,7 +8,7 @@ def dfs(idx, arr):
     dfs(idx + mn_idx + 1, arr[mn_idx + 1:])
     dfs(idx, arr[:mn_idx])
 
-g
+
 S = list(input().rstrip())
 res = ['' for _ in range(len(S))]
 dfs(0, S)

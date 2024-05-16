@@ -1,17 +1,16 @@
-from collections import deque
+import sys
+
+sys.setrecursionlimit(10 ** 6)
 
 
-def bfs(X):
-    dq = deque([X])
-    m = 10001
-    while dq:
-        x = dq.popleft()
-        for i in lst[x]:
-            if visit[i] == 0:
-                m = min(m, N[i], N[X])
-                visit[i] = 1
-    print(X, m)
-    return m
+def dfs(X):
+    visit[X] = True
+    min_p = N[X]
+    for nxt in lst[X]:
+        if visit[nxt] == 1:
+            continue
+        min_p = min(min_p, dfs(nxt))
+    return min_p
 
 
 n, m, k = map(int, input().split())
@@ -25,6 +24,5 @@ for _ in range(m):
     lst[w - 1].append(v - 1)
 for i in range(n):
     if visit[i] == 0:
-        visit[i] = 1
-        cnt += bfs(i)
-print(cnt)
+        cnt += dfs(i)
+print(cnt if cnt <= k else "Oh no")

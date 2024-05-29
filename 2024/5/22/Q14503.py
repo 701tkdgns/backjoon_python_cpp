@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 from collections import deque
 
 
@@ -36,3 +37,7 @@ R, C, D = map(int, input().split())
 graph = [list(map(int, input().split())) for _ in range(N)]
 res = bfs(R, C, D)
 print(res)
+=======
+N, M = map(int, input().split())
+R, C, D = map(int, input().split())
+>>>>>>> Stashed changes

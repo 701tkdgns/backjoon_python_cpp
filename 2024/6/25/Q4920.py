@@ -5,7 +5,7 @@ I_direction = [
 
 S_direction = [
     [[0, 0], [0, 1], [1, 1], [1, 2]],
-    [[0, 1], [0, 2], [1, 0], [1, 2]]
+    [[0, 1], [1, 0], [1, 1], [2, 0]]
 ]
 
 L_direction = [
@@ -16,7 +16,7 @@ L_direction = [
 ]
 
 Square_direction = [
-    [[0, 0], [0, 1], [1, 1], [1, 0]]
+    [[0, 0], [0, 1], [1, 0], [1, 1]]
 ]
 
 T_direction = [
@@ -26,9 +26,11 @@ T_direction = [
     [[0, 0], [0, 1], [0, 2], [1, 1]]
 ]
 
+idx = 1
+
 
 def check(x, y, directions):
-    tmp = -4000004
+    tmp = -987654321
     for direction in directions:
         chk = True
         tmp_sum = 0
@@ -46,13 +48,12 @@ def check(x, y, directions):
 
 while True:
     N = int(input())
-    idx = 1
     if N == 0:
         break
     lst = []
     for _ in range(N):
         lst.append(list(map(int, input().split())))
-    res = -4000004
+    res = -987654321
 
     for i in range(N):
         for j in range(N):

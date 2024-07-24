@@ -10,7 +10,7 @@ for _ in range(T):
         c = coins[n - 1]
         for m in range(1, M + 1):
             dp[n][m] = dp[n - 1][m]
-            if dp[n][m] + c <= M:
+            if c <= m:
                 dp[n][m] = dp[n][m] + dp[n][m - c]
     # for d in dp:
     #     print(*d)

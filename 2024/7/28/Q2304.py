@@ -1,20 +1,21 @@
 N = int(input())
 lst = []
+maxL, maxH, maxIdx = 0, 0, 0
+res, L, R = 0, 0, 0
 for _ in range(N):
     l, h = map(int, input().split())
+    maxL = l if l > maxL else maxL
+    maxH = h if h > maxH else maxH
+    maxIdx = l if h == maxH else maxIdx
     lst.append([l, h])
-lst.sort()
-stk = []
-# print(lst)
-res = 0
-for i in range(N):
-    tmp_l, tmp_h = 0, 0
-    while stk and stk[0][1] < lst[i][1]:
-        ll, hh = stk.pop()
-        tmp_l = max(tmp_l, lst[i][0] - ll)
-        tmp_h = stk[0][0] if (stk and tmp_h == 0) else tmp_h
-    if tmp_l != 0 and tmp_h != 0:
-        print(tmp_l, tmp_h)
-        res += tmp_l * tmp_h
-    stk.append(lst[i])
-print(res, stk)
+stk = [0 for _ in range(maxL + 1)]
+for ll, hh in lst:
+    stk[ll] = hh
+for i in range(maxIdx):
+    L = stk[i] if L < stk[i] else L
+    res += L
+for i in range(maxL, maxIdx, - 1):
+    R = stk[i] if R < stk[i] else R
+    res += R
+res += stk[maxIdx]
+print(res)

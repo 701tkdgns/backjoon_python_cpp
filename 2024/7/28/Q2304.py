@@ -19,3 +19,5 @@ for i in range(maxL, maxIdx, - 1):
     res += R
 res += stk[maxIdx]
 print(res)
+
+# https://ssu-gongdoli.tistory.com/112

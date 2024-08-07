@@ -1,28 +1,18 @@
-import sys
-input = sys.stdin.readline
+import math
 
-def GCD(a, b):
-    if b == 0:
-        return a
-    else:
-        return GCD(b, a % b)
+# 두 숫자의 최소 공배수(LCM)를 계산하는 함수
+def lcm(a, b):
+    return abs(a * b) // math.gcd(a, b)
 
+# 입력 처리
 N = int(input())
 lst = list(map(int, input().split()))
-gcd = GCD(max(lst[N - 1], lst[N - 2]), min(lst[N - 1], lst[N - 2]))
-cnt = 1
-while True:
-    tst = gcd * cnt
-    chk = True
-    for v in lst:
-        if tst >= v:
-            if tst % v == 0:
-                continue
-            else:
-                tst = tst - tst % v
-        else:
-            chk = False
-    if chk:
-        break
-    cnt += 1
-print(gcd * cnt)
+
+# 초기 최소 속도 설정
+current_lcm = lst[0]
+
+# 각 속도를 순회하며 최소 공배수를 업데이트
+for i in range(1, N):
+    current_lcm = lcm(current_lcm, lst[i])
+
+print(current_lcm)

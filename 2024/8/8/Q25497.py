@@ -9,6 +9,7 @@ for s in skills:
         res += 1
     else:
         if s == 'S':
+
             SK.append(s)
         if s == 'L':
             LR.append(s)

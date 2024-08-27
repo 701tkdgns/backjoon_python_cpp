@@ -85,8 +85,8 @@ from platform import node
 #
 #
 #     def __init__(self):
-#         for i in range(26):
-#             node = [Trie() for _ in range(26)]
+#         for i in range(27):
+#             node = [Trie() for _ in range(27)]
 #
 #     def insert(self, string, idx):
 #         if idx == len(string):
